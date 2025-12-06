@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: .        # current directory (root)
+      dockerfile: Dockerfile
+    container_name: nodeapp
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=${MONGO_URI}
+    depends_on:
+      - mongo
+    networks:
+      - scdnet
+    ports:
+      - "3000:3000"
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=scdproject
+    networks:
+      - scdnet
+    volumes:
+      - mongo_data:/data/db
+
+networks:
+  scdnet:
+    driver: bridge
+
+volumes:
+  mongo_data:
+
