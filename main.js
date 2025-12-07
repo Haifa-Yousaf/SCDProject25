@@ -181,7 +181,12 @@ console.log(`
    }
 
 // Start the application
-menu();
+if (process.env.NODE_ENV !== "production") {
+    showMenu();
+}
+else {
+   console.log("Running in Docker — no interactive menu allowed.");
+}
 
 
 

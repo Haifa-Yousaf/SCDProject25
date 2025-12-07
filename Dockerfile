@@ -16,5 +16,9 @@ COPY . .
 # Expose the port your app listens on
 EXPOSE 4000
 
+#Production environmen
+ENV NODE_ENV=production
+ENV MONGO_URI=mongodb://mongo:27017/scdproject
+
 # Start the app
 CMD ["node", "main.js"]
